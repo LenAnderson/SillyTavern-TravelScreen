@@ -1,0 +1,172 @@
+.stls--bg {
+  --transition: 400;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  height: 100%;
+  max-height: unset;
+  margin: 0;
+  width: 100%;
+  max-width: unset;
+  opacity: 0;
+  transition: calc(1ms * var(--transition));
+}
+.stls--bg.stls--showBackdrop {
+  opacity: 1;
+}
+.stls--root {
+  --blur: 6;
+  --transition: 400;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  background-color: transparent;
+  box-shadow: 0px 0px 14px var(--black70a);
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  opacity: 0;
+  transition: calc(1ms * var(--transition));
+}
+.stls--root:focus-visible {
+  outline: none;
+}
+.stls--root::backdrop {
+  backdrop-filter: blur(0);
+  transition: calc(1ms * var(--transition));
+}
+.stls--root.stls--showBackdrop::backdrop {
+  backdrop-filter: blur(calc(var(--blur) * 1px));
+}
+.stls--root.stls--show {
+  opacity: 1;
+}
+.stls--root[data-stwiz-size="inset"] {
+  aspect-ratio: 1920 / 1080;
+  height: auto;
+  max-height: 80%;
+  width: auto;
+  max-width: 60%;
+}
+.stls--root[data-stwiz-size="full"] {
+  aspect-ratio: 1920 / 1080;
+  border: none;
+  border-radius: 0;
+  height: auto;
+  max-height: 100%;
+  margin: 0;
+  width: auto;
+  max-width: 100%;
+}
+.stls--root[data-stwiz-size="full"] .stls--layers {
+  height: auto;
+  width: auto;
+}
+.stls--layers {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+.stls--layers.stls--inset {
+  box-shadow: 0px 0px 14px var(--black70a);
+  border: 1px solid var(--SmartThemeBorderColor);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.stls--layer {
+  grid-column: 1;
+  grid-row: 1;
+  height: 100%;
+  width: 100%;
+}
+.stls--helper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--SmartThemeBlurTintColor);
+  box-shadow: 0px 0px 14px var(--black70a);
+  border: none;
+  border-radius: 10px;
+  height: 90vh;
+  overflow: hidden;
+  padding: 10px;
+  position: relative;
+  width: 90vw;
+}
+.stls--helper:focus-visible {
+  outline: none;
+}
+.stls--helper::backdrop {
+  backdrop-filter: blur(6px);
+}
+.stls--helper .stls--help {
+  flex: 0 0 auto;
+}
+.stls--helper .stls--layers {
+  flex: 1 1 auto;
+  grid-template-columns: 100%;
+  grid-template-rows: 100%;
+  height: unset;
+  overflow: hidden;
+  position: relative;
+  width: unset;
+}
+.stls--helper .stls--layers .stls--canvas {
+  pointer-events: none;
+}
+.stls--helper .stls--timeline {
+  align-self: stretch;
+}
+.stls--helper .stls--timeline input[type="range"]::-webkit-slider-thumb {
+  margin-bottom: 1em;
+}
+.stls--helper .stls--timeline datalist {
+  display: flex;
+  justify-content: space-between;
+  font-size: smaller;
+  opacity: 0.5;
+}
+.stls--helper .stls--timeline option {
+  padding: 0;
+}
+.stls--helper .stls--cmd {
+  flex: 0 0 auto;
+  align-self: stretch;
+  max-height: 30%;
+  overflow: auto;
+  position: relative;
+}
+.stls--helper .stls--cmd code {
+  padding-right: calc(1.25em + 20px);
+  tab-size: 4;
+}
+.stls--helper .stls--cmd .stls--copy {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  margin: 0;
+  transition: 200ms;
+  opacity: 0.5;
+}
+.stls--helper .stls--cmd .stls--copy:hover {
+  opacity: 1;
+}
+.stls--helper .stls--cmd .stls--copy.stac--success {
+  background-color: #51a351;
+  opacity: 1;
+}
+.stls--helper .stls--cmd .stls--copy.stac--failure {
+  background-color: #bd362f;
+  opacity: 1;
+}
