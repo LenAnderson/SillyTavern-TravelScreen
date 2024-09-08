@@ -73,6 +73,7 @@ export class TravelScreen {
         this.isActive = true;
         this.promise = new Promise(resolve=>this.resolve = resolve);
         const dom = await this.render();
+        if (!this.isActive) return;
         if (this.before) {
             await this.before.execute();
         }
@@ -94,8 +95,13 @@ export class TravelScreen {
         // return result;
     }
 
-    async stop(result = null) {
+    async abort(result = null) {
+        this.isActive = false;
         this.resolve(result ?? '');
+        this.dom.root.close();
+        Object.keys(this.dom).forEach(key=>this.dom[key]?.remove?.());
+        this.dom.root = null;
+
     }
 
 
@@ -166,9 +172,13 @@ export class TravelScreen {
                     const prom = new Promise(resolve=>{
                         if (bg.complete) return resolve();
                         bg.addEventListener('load', resolve);
-                        bg.addEventListener('error', resolve);
+                        bg.addEventListener('error', ()=>{
+                            this.abort();
+                            resolve();
+                        });
                     });
                     promprom = prom.then(async()=>{
+                        if (!this.isActive) return;
                         this.width = bg.naturalWidth;
                         this.height = bg.naturalHeight;
                         const a = this.width / this.height;
@@ -327,6 +337,7 @@ export class TravelScreen {
         let lastFrame = 0;
         const { promise, resolve } = Promise.withResolvers();
         const animateFrame = ()=>{
+            if (!this.isActive) return;
             const now = performance.now();
             if (now - lastFrame < fpsTime) return requestAnimationFrame(animateFrame);
             const delta = lastFrame == 0 ? 0 : now - lastFrame;

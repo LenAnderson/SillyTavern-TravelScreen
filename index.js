@@ -48,6 +48,7 @@ SlashCommandParser.addCommandObject(SlashCommand.fromProps({ name: 'indy',
         ls.zoom = Number(args.zoom ?? ls.zoom);
         ls.speed = Number(args.speed ?? ls.speed);
         ls.pointList = JSON.parse(value ?? '[]').map(it=>({ x:it[0], y:it[1], dist:null, totalDist:null }));
+        if (ls.pointList.length < 2) throw new Error(`/indy requires a list with at least two points: ${value}`);
         ls.lineWidth = Number(args.linewidth ?? ls.lineWidth);
         ls.lineColor = args.linecolor ?? ls.lineColor;
         ls.lineShadowSize = Number(args.lineshadow ?? ls.lineShadowSize);
