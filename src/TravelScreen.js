@@ -81,7 +81,7 @@ export class TravelScreen {
         // const result = await this.promise;
         this.isActive = false;
         this.dom.root.classList.remove('stls--showBackdrop');
-        this.dom.bgImg.classList.remove('stls--showBackdrop');
+        this.dom.bgImg?.classList?.remove('stls--showBackdrop');
         this.dom.root.classList.remove('stls--show');
         await delay(this.transitionTime + 10);
         dom.close();
@@ -302,9 +302,9 @@ export class TravelScreen {
                 });
                 document.body.append(root);
                 root.showModal();
-                await bgProm;
+                await (bgProm ?? Promise.resolve());
                 await waitForFrame();
-                this.dom.bgImg.classList.add('stls--showBackdrop');
+                this.dom.bgImg?.classList.add('stls--showBackdrop');
                 root.classList.add('stls--showBackdrop');
                 await delay(this.transitionTime + 10);
                 await promprom;
